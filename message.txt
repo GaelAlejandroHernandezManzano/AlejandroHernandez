@@ -1,0 +1,1364 @@
+<!doctype html>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica Veterinaria</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+      position: relative;
+      min-height: 100%;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 60% 20%, rgba(6, 182, 212, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 10% 60%, rgba(14, 165, 233, 0.07) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    body::after {
+      content: '🐾';
+      position: fixed;
+      font-size: 100px;
+      opacity: 0.03;
+      top: 10%;
+      left: 5%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .decorative-element-1 {
+      position: fixed;
+      font-size: 80px;
+      opacity: 0.04;
+      top: 25%;
+      right: 8%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 10s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+    
+    .decorative-element-2 {
+      position: fixed;
+      font-size: 60px;
+      opacity: 0.05;
+      bottom: 15%;
+      left: 10%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    
+    .decorative-element-3 {
+      position: fixed;
+      font-size: 70px;
+      opacity: 0.04;
+      top: 50%;
+      right: 15%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 9s ease-in-out infinite;
+      animation-delay: 0.5s;
+    }
+    
+    .decorative-element-4 {
+      position: fixed;
+      font-size: 50px;
+      opacity: 0.06;
+      bottom: 30%;
+      right: 5%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 11s ease-in-out infinite;
+      animation-delay: 3s;
+    }
+    
+    .decorative-element-5 {
+      position: fixed;
+      font-size: 90px;
+      opacity: 0.03;
+      top: 70%;
+      left: 3%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 13s ease-in-out infinite;
+      animation-delay: 1.5s;
+    }
+    
+    .decorative-element-6 {
+      position: fixed;
+      font-size: 55px;
+      opacity: 0.05;
+      top: 40%;
+      left: 12%;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 10.5s ease-in-out infinite;
+      animation-delay: 2.5s;
+    }
+    
+    .circle-decoration {
+      position: fixed;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 2px solid rgba(14, 165, 233, 0.08);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulse 8s ease-in-out infinite;
+    }
+    
+    .circle-1 {
+      top: 5%;
+      right: 20%;
+    }
+    
+    .circle-2 {
+      bottom: 10%;
+      left: 25%;
+      width: 150px;
+      height: 150px;
+      border-color: rgba(6, 182, 212, 0.1);
+      animation-delay: 2s;
+    }
+    
+    .circle-3 {
+      top: 60%;
+      right: 30%;
+      width: 120px;
+      height: 120px;
+      border-color: rgba(14, 165, 233, 0.06);
+      animation-delay: 4s;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { 
+        transform: scale(1);
+        opacity: 0.5;
+      }
+      50% { 
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    .w-full > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    .hero-section {
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-button {
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .tip-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .tip-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Dark theme styles */
+    body.dark-theme {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+    
+    body.dark-theme::before {
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 60% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 10% 60%, rgba(14, 165, 233, 0.13) 0%, transparent 55%);
+    }
+    
+    body.dark-theme #main-header {
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+    }
+    
+    body.dark-theme #clinic-name,
+    body.dark-theme .text-gray-800 {
+      color: #f1f5f9 !important;
+    }
+    
+    body.dark-theme .nav-link {
+      color: #cbd5e1 !important;
+    }
+    
+    body.dark-theme .nav-link:hover {
+      color: #38bdf8 !important;
+    }
+    
+    body.dark-theme #theme-toggle {
+      background: #334155;
+    }
+    
+    body.dark-theme #theme-toggle:hover {
+      background: #475569;
+    }
+    
+    body.dark-theme .service-card,
+    body.dark-theme .bg-white {
+      background: #1e293b !important;
+      color: #e2e8f0;
+      border: 2px solid #475569 !important;
+    }
+    
+    body.dark-theme .bg-gray-50 {
+      background: #0f172a !important;
+    }
+    
+    body.dark-theme .text-gray-700 {
+      color: #cbd5e1 !important;
+    }
+    
+    body.dark-theme .text-gray-600 {
+      color: #94a3b8 !important;
+    }
+    
+    body.dark-theme .text-gray-800 {
+      color: #f1f5f9 !important;
+    }
+    
+    body.dark-theme .border-gray-300 {
+      border-color: #475569 !important;
+    }
+    
+    body.dark-theme .border-gray-200 {
+      border-color: #475569 !important;
+    }
+    
+    body.dark-theme input,
+    body.dark-theme select {
+      background: #334155 !important;
+      color: #f1f5f9 !important;
+      border-color: #64748b !important;
+    }
+    
+    body.dark-theme input::placeholder {
+      color: #94a3b8 !important;
+    }
+    
+    body.dark-theme .bg-purple-50,
+    body.dark-theme .bg-cyan-50,
+    body.dark-theme .bg-sky-50,
+    body.dark-theme .bg-green-50,
+    body.dark-theme .bg-orange-50 {
+      background: #1e293b !important;
+      border: 2px solid #475569 !important;
+    }
+    
+    body.dark-theme .bg-purple-100,
+    body.dark-theme .bg-cyan-100,
+    body.dark-theme .bg-sky-100,
+    body.dark-theme .bg-green-100,
+    body.dark-theme .bg-orange-100 {
+      background: #334155 !important;
+    }
+    
+    /* Dark theme for calculator cards */
+    body.dark-theme .bg-gradient-to-br {
+      background: #1e293b !important;
+      border: 2px solid #475569 !important;
+    }
+    
+    /* Dark theme for tips section background */
+    body.dark-theme #consejos {
+      background: #0f172a !important;
+    }
+    
+    /* Dark theme for about section cards */
+    body.dark-theme #nosotros .bg-gradient-to-br {
+      background: #1e293b !important;
+      border: 2px solid #475569 !important;
+    }
+    
+    body.dark-theme #nosotros .bg-gradient-to-r {
+      background: linear-gradient(to right, #1e40af, #0e7490) !important;
+    }
+    
+    body.dark-theme .circle-decoration {
+      border-color: rgba(14, 165, 233, 0.3);
+    }
+    
+    body.dark-theme h2,
+    body.dark-theme h3,
+    body.dark-theme h4,
+    body.dark-theme label {
+      color: #f1f5f9 !important;
+    }
+    
+    body.dark-theme p {
+      color: #cbd5e1 !important;
+    }
+    
+    body.dark-theme .tip-card {
+      background: #1e293b !important;
+      border: 2px solid #475569 !important;
+    }
+    
+    body.dark-theme .rounded-xl,
+    body.dark-theme .rounded-lg {
+      border-color: #475569;
+    }
+    
+    body.dark-theme footer {
+      background: #0f172a !important;
+      border-top: 2px solid #334155;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="min-h-full">
+  <div class="decorative-element-1">
+   🐾
+  </div>
+  <div class="decorative-element-2">
+   🐕
+  </div>
+  <div class="decorative-element-3">
+   🐱
+  </div>
+  <div class="decorative-element-4">
+   ❤️
+  </div>
+  <div class="decorative-element-5">
+   🐾
+  </div>
+  <div class="decorative-element-6">
+   ⭐
+  </div>
+  <div class="circle-decoration circle-1"></div>
+  <div class="circle-decoration circle-2"></div>
+  <div class="circle-decoration circle-3"></div>
+  <div class="w-full"><!-- Header -->
+   <header id="main-header" class="w-full bg-white shadow-md transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+     <div class="flex items-center gap-3">
+      <svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="#0ea5e9" /> <path d="M20 10c-2 0-3.5 1.5-3.5 3.5 0 1.5 1 2.8 2.5 3.3v2.7c-3 .5-5.5 2.8-6 5.8-.2.8.4 1.7 1.3 1.7h11.4c.8 0 1.5-.8 1.3-1.7-.5-3-3-5.3-6-5.8v-2.7c1.5-.5 2.5-1.8 2.5-3.3 0-2-1.5-3.5-3.5-3.5z" fill="white" /> <ellipse cx="13" cy="18" rx="2" ry="3" fill="white" /> <ellipse cx="27" cy="18" rx="2" ry="3" fill="white" />
+      </svg>
+      <h1 id="clinic-name" class="text-2xl font-bold text-gray-800 transition-colors duration-300">Clínica Veterinaria Patitas Felices</h1>
+     </div>
+     <div class="flex items-center gap-6">
+      <nav class="hidden md:flex gap-6"><a href="#servicios" class="nav-link text-gray-700 hover:text-sky-600 font-medium transition">Servicios</a> <a href="#calculadoras" class="nav-link text-gray-700 hover:text-sky-600 font-medium transition">Calculadoras</a> <a href="#consejos" class="nav-link text-gray-700 hover:text-sky-600 font-medium transition">Consejos</a> <a href="#nosotros" class="nav-link text-gray-700 hover:text-sky-600 font-medium transition">Nosotros</a> <a href="#contacto" class="nav-link text-gray-700 hover:text-sky-600 font-medium transition">Contacto</a>
+      </nav><button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300" title="Cambiar tema">
+       <svg id="theme-icon-sun" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4" stroke="#f59e0b" stroke-width="2" fill="#fbbf24" /> <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" />
+       </svg>
+       <svg id="theme-icon-moon" class="hidden" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="#94a3b8" stroke-width="2" fill="#64748b" />
+       </svg></button>
+     </div>
+    </div>
+   </header><!-- Hero Section -->
+   <section class="hero-section w-full py-20 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 z-0"><img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1200&amp;h=600&amp;fit=crop" alt="Perros y gatos felices" class="w-full h-full object-cover opacity-70" onerror="this.style.display='none';">
+     <div class="absolute inset-0 bg-gradient-to-r from-sky-500/40 to-cyan-500/40"></div>
+    </div>
+    <div class="max-w-4xl mx-auto text-center text-white relative z-10">
+     <div class="inline-block bg-white bg-opacity-20 px-4 py-2 rounded-full mb-4"><span class="text-sm font-semibold">✨ ¡Nuevos! Abrimos nuestras puertas para ti</span>
+     </div>
+     <h2 id="hero-title" class="text-5xl font-bold mb-4">Tu Nueva Veterinaria de Confianza</h2>
+     <p id="hero-subtitle" class="text-xl mb-8 opacity-90">Atención personalizada y cercana para el cuidado de tu mejor amigo</p><button id="cta-button" onclick="openServicesModal()" class="cta-button bg-white text-sky-600 px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"> <span>Agenda tu Primera Cita</span>
+      <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 9l3 3 3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg></button>
+    </div>
+   </section><!-- Services Section -->
+   <section id="servicios" class="w-full py-16 px-6 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+     <h2 id="services-title" class="text-4xl font-bold text-center mb-12 text-gray-800">Nuestros Servicios</h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="service-card bg-white rounded-xl p-6 shadow-md">
+       <div class="flex justify-center mb-4 overflow-hidden rounded-lg"><img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=400&amp;h=300&amp;fit=crop" alt="Veterinario examinando perro" class="w-full h-48 object-cover" onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';">
+       </div>
+       <h3 id="service-1-title" class="text-xl font-semibold text-center mb-2 text-gray-800">Consulta General</h3>
+       <p id="service-1-desc" class="text-gray-600 text-center mb-4">Exámenes completos y diagnósticos precisos</p><button onclick="openCalendarFromCard('Consulta General')" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 rounded-lg transition"> Agendar Cita </button>
+      </div>
+      <div class="service-card bg-white rounded-xl p-6 shadow-md">
+       <div class="flex justify-center mb-4 overflow-hidden rounded-lg"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&amp;h=300&amp;fit=crop" alt="Gato siendo vacunado" class="w-full h-48 object-cover" onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';">
+       </div>
+       <h3 id="service-2-title" class="text-xl font-semibold text-center mb-2 text-gray-800">Vacunación</h3>
+       <p id="service-2-desc" class="text-gray-600 text-center mb-4">Planes completos de vacunación para todas las edades</p><button onclick="openCalendarFromCard('Vacunación')" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 rounded-lg transition"> Agendar Cita </button>
+      </div>
+      <div class="service-card bg-white rounded-xl p-6 shadow-md">
+       <div class="flex justify-center mb-4 overflow-hidden rounded-lg"><img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&amp;h=300&amp;fit=crop" alt="Conejo siendo examinado" class="w-full h-48 object-cover" onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';">
+       </div>
+       <h3 id="service-3-title" class="text-xl font-semibold text-center mb-2 text-gray-800">Desparasitación</h3>
+       <p id="service-3-desc" class="text-gray-600 text-center mb-4">Control interno y externo de parásitos</p><button onclick="openCalendarFromCard('Desparasitación')" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 rounded-lg transition"> Agendar Cita </button>
+      </div>
+      <div class="service-card bg-white rounded-xl p-6 shadow-md">
+       <div class="flex justify-center mb-4 overflow-hidden rounded-lg"><img src="https://images.unsplash.com/photo-1548681528-6a5c45b66b42?w=400&amp;h=300&amp;fit=crop" alt="Perro comiendo alimento saludable" class="w-full h-48 object-cover" onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';">
+       </div>
+       <h3 id="service-4-title" class="text-xl font-semibold text-center mb-2 text-gray-800">Asesoría Nutricional</h3>
+       <p id="service-4-desc" class="text-gray-600 text-center mb-4">Recomendaciones personalizadas de alimentación</p><button onclick="openCalendarFromCard('Asesoría Nutricional')" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 rounded-lg transition"> Agendar Cita </button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Calculator Section -->
+   <section id="calculadoras" class="w-full py-16 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Calculadoras Veterinarias</h2>
+     <p class="text-center text-gray-600 mb-12">Herramientas útiles para el cuidado de tu mascota</p>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-8"><!-- Age Calculator -->
+      <div class="bg-gradient-to-br from-purple-50 to-white rounded-xl shadow-lg p-6 border-2 border-purple-100">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" /> <path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round" />
+         </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800">Edad en Años Humanos</h3>
+       </div>
+       <div class="space-y-4">
+        <div><label for="pet-type" class="block text-sm font-semibold text-gray-700 mb-2">Tipo de Mascota</label> <select id="pet-type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"> <option value="dog">Perro</option> <option value="cat">Gato</option> </select>
+        </div>
+        <div><label for="pet-age" class="block text-sm font-semibold text-gray-700 mb-2">Edad de tu Mascota (años)</label> <input type="number" id="pet-age" min="0" max="30" step="0.5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Ej: 3">
+        </div><button onclick="calculateAge()" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition"> Calcular </button>
+        <div id="age-result" class="hidden bg-purple-100 border-2 border-purple-300 rounded-lg p-4 text-center">
+         <p class="text-3xl font-bold text-purple-700 mb-2" id="age-result-number"></p>
+         <p class="text-sm text-gray-700" id="age-result-text"></p>
+        </div>
+       </div>
+      </div><!-- Weight Calculator -->
+      <div class="bg-gradient-to-br from-cyan-50 to-white rounded-xl shadow-lg p-6 border-2 border-cyan-100">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="16" width="16" height="2" fill="white" /> <path d="M8 16V8a4 4 0 018 0v8" stroke="white" stroke-width="2" stroke-linecap="round" />
+         </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800">Peso Ideal</h3>
+       </div>
+       <div class="space-y-4">
+        <div><label for="dog-breed" class="block text-sm font-semibold text-gray-700 mb-2">Raza</label> <select id="dog-breed" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"> <option value="small">Raza Pequeña (Chihuahua, Pomerania)</option> <option value="medium">Raza Mediana (Beagle, Cocker)</option> <option value="large">Raza Grande (Labrador, Pastor Alemán)</option> <option value="giant">Raza Gigante (Gran Danés, San Bernardo)</option> </select>
+        </div>
+        <div><label for="current-weight" class="block text-sm font-semibold text-gray-700 mb-2">Peso Actual (kg)</label> <input type="number" id="current-weight" min="0" step="0.1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Ej: 15">
+        </div><button onclick="calculateWeight()" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 rounded-lg transition"> Verificar Peso </button>
+        <div id="weight-result" class="hidden rounded-lg p-4 text-center">
+         <p class="text-lg font-bold mb-2" id="weight-status"></p>
+         <p class="text-sm" id="weight-recommendation"></p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Tips Section -->
+   <section id="consejos" class="w-full py-16 px-6 bg-gradient-to-br from-sky-50 to-cyan-50">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Consejos y Tips</h2>
+     <p class="text-center text-gray-600 mb-12">Información útil para el cuidado diario de tu mascota</p><!-- Category Tabs -->
+     <div class="flex flex-wrap justify-center gap-3 mb-8"><button onclick="showTips('all')" id="tab-all" class="px-6 py-2 rounded-full font-semibold transition bg-sky-500 text-white"> Todos </button> <button onclick="showTips('nutrition')" id="tab-nutrition" class="px-6 py-2 rounded-full font-semibold transition bg-white text-gray-700 hover:bg-sky-100"> Nutrición </button> <button onclick="showTips('health')" id="tab-health" class="px-6 py-2 rounded-full font-semibold transition bg-white text-gray-700 hover:bg-sky-100"> Salud </button> <button onclick="showTips('training')" id="tab-training" class="px-6 py-2 rounded-full font-semibold transition bg-white text-gray-700 hover:bg-sky-100"> Entrenamiento </button> <button onclick="showTips('grooming')" id="tab-grooming" class="px-6 py-2 rounded-full font-semibold transition bg-white text-gray-700 hover:bg-sky-100"> Aseo </button>
+     </div><!-- Tips Grid -->
+     <div id="tips-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Tips will be populated by JavaScript -->
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section id="nosotros" class="w-full py-16 px-6 relative z-0">
+    <div class="max-w-6xl mx-auto">
+     <h2 id="about-title" class="text-4xl font-bold text-center mb-8 text-gray-800">¿Por Qué Elegirnos?</h2>
+     <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+      <p id="about-text" class="text-gray-700 text-lg leading-relaxed text-center mb-6">Contamos con un equipo de veterinarios especializados apasionados por el bienestar animal. Utilizamos tecnología de última generación para ofrecer diagnósticos precisos y tratamientos efectivos. Nuestro compromiso es brindar atención personalizada, tratando a cada mascota con el amor y cuidado que merece.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+       <div class="text-center">
+        <div class="text-4xl font-bold text-sky-500 mb-2">
+         🏥
+        </div>
+        <div class="text-gray-600">
+         Recién Inaugurados
+        </div>
+       </div>
+       <div class="text-center">
+        <div class="text-4xl font-bold text-sky-500 mb-2">
+         ❤️
+        </div>
+        <div class="text-gray-600">
+         Atención Personalizada
+        </div>
+       </div>
+       <div class="text-center">
+        <div class="text-4xl font-bold text-sky-500 mb-2">
+         💰
+        </div>
+        <div class="text-gray-600">
+         Precios Accesibles
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-gradient-to-br from-sky-50 to-white rounded-xl shadow-md p-6">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="white" />
+         </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800">Nuestra Misión</h3>
+       </div>
+       <p class="text-gray-700 leading-relaxed">Proporcionar servicios veterinarios de excelencia, promoviendo el bienestar integral de las mascotas y fortaleciendo el vínculo entre ellas y sus familias a través de la educación, prevención y tratamiento compasivo.</p>
+      </div>
+      <div class="bg-gradient-to-br from-cyan-50 to-white rounded-xl shadow-md p-6">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="white" />
+         </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800">Nuestros Valores</h3>
+       </div>
+       <ul class="space-y-2 text-gray-700">
+        <li class="flex items-start gap-2"><span class="text-cyan-600 font-bold">❤️</span> <span><strong>Compasión:</strong> Tratamos a cada mascota con amor y respeto</span></li>
+        <li class="flex items-start gap-2"><span class="text-cyan-600 font-bold">⭐</span> <span><strong>Excelencia:</strong> Nos actualizamos constantemente</span></li>
+        <li class="flex items-start gap-2"><span class="text-cyan-600 font-bold">🤝</span> <span><strong>Transparencia:</strong> Comunicación clara y honesta</span></li>
+       </ul>
+      </div>
+     </div>
+     <div class="bg-white rounded-xl shadow-lg p-8">
+      <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">Nuestro Equipo</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+       <div class="text-center">
+        <div class="w-24 h-24 bg-gradient-to-br from-sky-400 to-sky-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+         <svg width="48" height="48" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="16" r="8" fill="white" /> <path d="M12 36c0-6.627 5.373-12 12-12s12 5.373 12 12v2H12v-2z" fill="white" />
+         </svg>
+        </div>
+        <p class="text-sm text-sky-600 font-semibold mb-2">Médico Veterinario</p>
+        <p class="text-xs text-gray-600">Especialista en medicina interna con 10 años de experiencia</p>
+       </div>
+       <div class="text-center">
+        <div class="w-24 h-24 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+         <svg width="48" height="48" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="16" r="8" fill="white" /> <path d="M12 36c0-6.627 5.373-12 12-12s12 5.373 12 12v2H12v-2z" fill="white" />
+         </svg>
+        </div>
+        <p class="text-sm text-cyan-600 font-semibold mb-2">Cirujano Veterinario</p>
+        <p class="text-xs text-gray-600">Experto en cirugía de tejidos blandos y traumatología</p>
+       </div>
+       <div class="text-center">
+        <div class="w-24 h-24 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+         <svg width="48" height="48" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="16" r="8" fill="white" /> <path d="M12 36c0-6.627 5.373-12 12-12s12 5.373 12 12v2H12v-2z" fill="white" />
+         </svg>
+        </div>
+        <p class="text-sm text-teal-600 font-semibold mb-2">Nutricionista Animal</p>
+        <p class="text-xs text-gray-600">Certificado en nutrición clínica y dietética veterinaria</p>
+       </div>
+      </div>
+     </div>
+     <div class="mt-8 bg-gradient-to-r from-sky-500 to-cyan-500 rounded-xl shadow-lg p-8 text-white">
+      <h3 class="text-2xl font-bold text-center mb-6">Nuestras Instalaciones</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+       <div class="text-center">
+        <div class="text-3xl mb-2">
+         🏥
+        </div>
+        <p class="text-sm font-semibold">Consultorios Modernos</p>
+       </div>
+       <div class="text-center">
+        <div class="text-3xl mb-2">
+         🔬
+        </div>
+        <p class="text-sm font-semibold">Laboratorio Propio</p>
+       </div>
+       <div class="text-center">
+        <div class="text-3xl mb-2">
+         💉
+        </div>
+        <p class="text-sm font-semibold">Área de Vacunación</p>
+       </div>
+       <div class="text-center">
+        <div class="text-3xl mb-2">
+         🛏️
+        </div>
+        <p class="text-sm font-semibold">Hospitalización</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contacto" class="w-full py-16 px-6 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+     <h2 id="contact-title" class="text-4xl font-bold text-center mb-12 text-gray-800">Contáctanos</h2>
+     <div class="bg-white rounded-xl shadow-lg p-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+       <div class="space-y-6">
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="#0ea5e9" stroke-width="2" />
+          </svg>
+         </div>
+         <div>
+          <div id="phone-label" class="font-semibold text-gray-800 mb-1">
+           Tel��fono:
+          </div>
+          <div id="phone-number" class="text-gray-600">
+           (123) 456-7890
+          </div>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+         </div>
+         <div>
+          <div id="email-label" class="font-semibold text-gray-800 mb-1">
+           Email:
+          </div>
+          <div id="email-address" class="text-gray-600">
+           contacto@veterinaria.com
+          </div>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#0ea5e9" stroke-width="2" /> <path d="M12 6v6l4 2" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" />
+          </svg>
+         </div>
+         <div>
+          <div id="hours-label" class="font-semibold text-gray-800 mb-1">
+           Horario:
+          </div>
+          <div id="hours-text" class="text-gray-600">
+           Lun - Vie: 9:00 - 20:00 | Sáb: 9:00 - 14:00
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="bg-purple-50 rounded-lg p-6">
+        <div class="text-center mb-6">
+         <svg width="120" height="120" viewbox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4"><ellipse cx="60" cy="108" rx="30" ry="6" fill="#000000" opacity="0.15" /> <path d="M82 70 Q95 75 98 82 Q100 88 96 92" stroke="#d97706" stroke-width="8" stroke-linecap="round" fill="none" /> <path d="M82 70 Q93 74 96 81 Q97 85 95 89" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" fill="none" /> <ellipse cx="60" cy="78" rx="30" ry="26" fill="#d97706" /> <ellipse cx="60" cy="78" rx="27" ry="23" fill="#f59e0b" /> <ellipse cx="60" cy="77" rx="24" ry="20" fill="#fbbf24" opacity="0.3" /> <ellipse cx="60" cy="86" rx="12" ry="16" fill="#fef3c7" /> <ellipse cx="60" cy="85" rx="10" ry="14" fill="#fef9e5" /> <circle cx="60" cy="52" r="24" fill="#d97706" /> <circle cx="60" cy="52" r="22" fill="#f59e0b" /> <circle cx="60" cy="51" r="19" fill="#fbbf24" opacity="0.2" /> <ellipse cx="40" cy="42" rx="9" ry="18" fill="#d97706" transform="rotate(-12 40 42)" /> <ellipse cx="40" cy="42" rx="7" ry="15" fill="#f59e0b" transform="rotate(-12 40 42)" /> <ellipse cx="40" cy="45" rx="4" ry="10" fill="#fbbf24" opacity="0.4" transform="rotate(-12 40 45)" /> <ellipse cx="80" cy="42" rx="9" ry="18" fill="#d97706" transform="rotate(12 80 42)" /> <ellipse cx="80" cy="42" rx="7" ry="15" fill="#f59e0b" transform="rotate(12 80 42)" /> <ellipse cx="80" cy="45" rx="4" ry="10" fill="#fbbf24" opacity="0.4" transform="rotate(12 80 45)" /> <ellipse cx="60" cy="60" rx="13" ry="10" fill="#fef3c7" /> <ellipse cx="60" cy="59" rx="11" ry="8" fill="#fef9e5" /> <ellipse cx="51" cy="49" rx="4" ry="5.5" fill="#1f2937" /> <ellipse cx="69" cy="49" rx="4" ry="5.5" fill="#1f2937" /> <ellipse cx="51" cy="48" rx="2.5" ry="4" fill="#000000" /> <ellipse cx="69" cy="48" rx="2.5" ry="4" fill="#000000" /> <circle cx="51.5" cy="47" r="1.8" fill="#ffffff" /> <circle cx="69.5" cy="47" r="1.8" fill="#ffffff" /> <circle cx="52.5" cy="50" r="0.8" fill="#ffffff" opacity="0.7" /> <circle cx="70.5" cy="50" r="0.8" fill="#ffffff" opacity="0.7" /> <path d="M46 45 Q51 43 56 45" stroke="#d97706" stroke-width="2" stroke-linecap="round" fill="none" /> <path d="M64 45 Q69 43 74 45" stroke="#d97706" stroke-width="2" stroke-linecap="round" fill="none" /> <ellipse cx="60" cy="57" rx="6" ry="5" fill="#1f2937" /> <ellipse cx="60" cy="56" rx="2" ry="1.5" fill="#ffffff" opacity="0.5" /> <ellipse cx="58" cy="57" rx="1" ry="1.5" fill="#000000" /> <ellipse cx="62" cy="57" rx="1" ry="1.5" fill="#000000" /> <path d="M60 60 V 64" stroke="#1f2937" stroke-width="2.5" stroke-linecap="round" /> <path d="M60 64 Q54 69 47 67" stroke="#1f2937" stroke-width="2.5" stroke-linecap="round" fill="none" /> <path d="M60 64 Q66 69 73 67" stroke="#1f2937" stroke-width="2.5" stroke-linecap="round" fill="none" /> <ellipse cx="60" cy="68" rx="7" ry="5" fill="#ec4899" /> <ellipse cx="60" cy="67" rx="5" ry="3" fill="#fb7185" /> <path d="M60 64 Q60 66 60 70" stroke="#db2777" stroke-width="1.2" opacity="0.5" /> <ellipse cx="60" cy="70" rx="18" ry="4" fill="#ef4444" /> <ellipse cx="60" cy="69" rx="16" ry="3" fill="#f87171" /> <circle cx="60" cy="70" r="3.5" fill="#fbbf24" /> <circle cx="60" cy="70" r="2.5" fill="#fcd34d" /> <path d="M60 68 L60 72" stroke="#d97706" stroke-width="0.8" /> <ellipse cx="48" cy="102" rx="8" ry="6" fill="#d97706" /> <ellipse cx="48" cy="101" rx="7" ry="5" fill="#f59e0b" /> <circle cx="45" cy="102" r="1.8" fill="#d97706" /> <circle cx="48" cy="103" r="1.8" fill="#d97706" /> <circle cx="51" cy="102" r="1.8" fill="#d97706" /> <ellipse cx="72" cy="102" rx="8" ry="6" fill="#d97706" /> <ellipse cx="72" cy="101" rx="7" ry="5" fill="#f59e0b" /> <circle cx="69" cy="102" r="1.8" fill="#d97706" /> <circle cx="72" cy="103" r="1.8" fill="#d97706" /> <circle cx="75" cy="102" r="1.8" fill="#d97706" /> <g opacity="0.9">
+           <path d="M88 28 L88 30 Q88 34 92 38 Q96 34 96 30 L96 28 Q96 24 92 24 Q88 24 88 28 Z" fill="#ef4444" />
+           <ellipse cx="88" cy="28" rx="4" ry="4" fill="#ef4444" />
+           <ellipse cx="96" cy="28" rx="4" ry="4" fill="#ef4444" />
+          </g> <path d="M26 52 L28 54 L26 56 L24 54 Z" fill="#fbbf24" /> <circle cx="26" cy="54" r="1" fill="#fef3c7" /> <path d="M90 62 L92 64 L90 66 L88 64 Z" fill="#06b6d4" /> <circle cx="90" cy="64" r="1" fill="#cffafe" />
+         </svg>
+         <p class="text-gray-700 font-medium mb-4">¡Estamos aquí para cuidar a tu mejor amigo!</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm">
+         <div class="flex items-center justify-center gap-3 mb-3">
+          <svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#25D366" /> <circle cx="20" cy="20" r="18" fill="#25D366" /> <path d="M20 6C12.268 6 6 12.268 6 20c0 2.456.638 4.863 1.85 6.99L6.2 32.8c-.15.45.3.9.75.75l5.81-1.65C14.787 33.112 17.344 34 20 34c7.732 0 14-6.268 14-14S27.732 6 20 6z" fill="#25D366" /> <path d="M20 7.5c-6.904 0-12.5 5.596-12.5 12.5 0 2.235.593 4.434 1.72 6.378l.18.31-1.15 4.19 4.28-1.12.3.18A12.46 12.46 0 0020 31.5c6.904 0 12.5-5.596 12.5-12.5S26.904 7.5 20 7.5z" fill="white" /> <path d="M20 9c-6.075 0-11 4.925-11 11 0 2.025.555 3.925 1.52 5.555l-1 3.64 3.74-.98A10.94 10.94 0 0020 30c6.075 0 11-4.925 11-11S26.075 9 20 9z" fill="#25D366" /> <path d="M15.5 13.5c-.25 0-.65.1-.95.5-.3.4-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.1 3.3 5.15 4.525 2.55 1.025 3.05.825 3.6.775.55-.05 1.775-.725 2.025-1.425.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35-.3-.15-1.775-.875-2.05-.975-.275-.1-.475-.15-.675.15-.2.3-.775.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.265-.465-2.41-1.485-.89-.795-1.49-1.775-1.665-2.075-.175-.3-.02-.465.13-.615.135-.135.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.24-.58-.485-.5-.675-.51-.175-.01-.375-.01-.575-.01z" fill="white" />
+          </svg>
+          <div>
+           <div class="text-sm font-semibold text-gray-800">
+            WhatsApp
+           </div>
+           <div class="text-xs text-gray-600">
+            (123) 456-7890
+           </div>
+          </div>
+         </div><a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg text-center transition"> Enviar Mensaje </a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Services Modal -->
+   <div id="services-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4" style="display: none;">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-6 relative max-h-[90vh] overflow-y-auto"><button onclick="closeServicesModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold z-10">×</button>
+     <h3 class="text-3xl font-bold text-gray-800 mb-2 text-center">Elige tu Servicio</h3>
+     <p class="text-gray-600 text-center mb-8">Selecciona el servicio que necesitas para tu mascota</p>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><button onclick="openCalendarFromMenu('Consulta General')" class="text-left p-6 hover:bg-sky-50 transition flex items-start gap-4 border-2 border-gray-200 hover:border-sky-300 rounded-xl">
+       <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0">
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#0ea5e9" stroke-width="2" /> <path d="M12 8v4M12 16h.01" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" />
+        </svg>
+       </div>
+       <div class="flex-1">
+        <div id="modal-menu-service-1" class="text-lg font-bold text-gray-800 mb-2">
+         Consulta General
+        </div>
+        <div class="text-sm text-gray-600 leading-relaxed">
+         • Examen físico completo<br>
+          • Diagnóstico de enfermedades<br>
+          • Orientación preventiva
+        </div>
+       </div></button> <button onclick="openCalendarFromMenu('Vacunación')" class="text-left p-6 hover:bg-green-50 transition flex items-start gap-4 border-2 border-gray-200 hover:border-green-300 rounded-xl">
+       <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="2" width="6" height="20" rx="1" stroke="#10b981" stroke-width="2" /> <path d="M7 8h10M7 12h10M7 16h10" stroke="#10b981" stroke-width="2" /> <circle cx="12" cy="4" r="1.5" fill="#10b981" />
+        </svg>
+       </div>
+       <div class="flex-1">
+        <div id="modal-menu-service-2" class="text-lg font-bold text-gray-800 mb-2">
+         Vacunación
+        </div>
+        <div class="text-sm text-gray-600 leading-relaxed">
+         • Planes de vacunación completos<br>
+          • Refuerzos y recordatorios<br>
+          • Protección contra enfermedades
+        </div>
+       </div></button> <button onclick="openCalendarFromMenu('Desparasitación')" class="text-left p-6 hover:bg-orange-50 transition flex items-start gap-4 border-2 border-gray-200 hover:border-orange-300 rounded-xl">
+       <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#f97316" stroke-width="2" /> <path d="M12 7v10M7 12h10" stroke="#f97316" stroke-width="2" stroke-linecap="round" /> <circle cx="8" cy="8" r="1.5" fill="#f97316" /> <circle cx="16" cy="8" r="1.5" fill="#f97316" /> <circle cx="8" cy="16" r="1.5" fill="#f97316" /> <circle cx="16" cy="16" r="1.5" fill="#f97316" />
+        </svg>
+       </div>
+       <div class="flex-1">
+        <div id="modal-menu-service-3" class="text-lg font-bold text-gray-800 mb-2">
+         Desparasitación
+        </div>
+        <div class="text-sm text-gray-600 leading-relaxed">
+         • Control de parásitos internos<br>
+          • Tratamiento de parásitos externos<br>
+          • Programas preventivos
+        </div>
+       </div></button> <button onclick="openCalendarFromMenu('Asesoría Nutricional')" class="text-left p-6 hover:bg-cyan-50 transition flex items-start gap-4 border-2 border-gray-200 hover:border-cyan-300 rounded-xl">
+       <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0">
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18M3 12h18M3 18h12" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" /> <circle cx="19" cy="18" r="3" stroke="#06b6d4" stroke-width="2" /> <path d="M19 17v2M18 18h2" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+       </div>
+       <div class="flex-1">
+        <div id="modal-menu-service-4" class="text-lg font-bold text-gray-800 mb-2">
+         Asesoría Nutricional
+        </div>
+        <div class="text-sm text-gray-600 leading-relaxed">
+         • Planes alimenticios personalizados<br>
+          • Control de peso y obesidad<br>
+          • Dietas especiales terapéuticas
+        </div>
+       </div></button>
+     </div>
+    </div>
+   </div><!-- Calendar Modal -->
+   <div id="calendar-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4" style="display: none;">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 relative"><button onclick="closeCalendar()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold">×</button>
+     <h3 id="modal-service-title" class="text-2xl font-bold text-gray-800 mb-4 text-center">Agendar Cita</h3>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+       <div class="bg-purple-50 rounded-xl p-4">
+        <div class="flex items-center justify-between mb-4"><button id="prev-month" class="p-2 hover:bg-purple-100 rounded-lg transition">
+          <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 15L7.5 10L12.5 5" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg></button>
+         <h4 id="calendar-month-year" class="text-lg font-bold text-gray-800"></h4><button id="next-month" class="p-2 hover:bg-purple-100 rounded-lg transition">
+          <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 15L12.5 10L7.5 5" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg></button>
+        </div>
+        <div class="grid grid-cols-7 gap-1 mb-2">
+         <div class="text-center text-xs font-semibold text-gray-600 py-2">
+          Dom
+         </div>
+         <div class="text-center text-xs font-semibold text-gray-600 py-2">
+          Lun
+         </div>
+         <div class="text-center text-xs font-semibold text-gray-600 py-2">
+          Mar
+         </div>
+         <div class="text-center text-xs font-semibold text-gray-600 py-2">
+          Mié
+         </div>
+         <div class="text-center text-xs font-semibold text-gray-600 py-2">
+          Jue
+         </div>
+         <div class="text-center text-xs font-semibold text-gray-600 py-2">
+          Vie
+         </div>
+         <div class="text-center text-xs font-semibold text-gray-600 py-2">
+          Sáb
+         </div>
+        </div>
+        <div id="calendar-days" class="grid grid-cols-7 gap-1">
+        </div>
+       </div>
+       <div id="selected-date-display" class="mt-4 text-center text-sm text-gray-600">
+        Selecciona una fecha en el calendario
+       </div>
+      </div>
+      <div>
+       <form id="appointment-form" class="space-y-4">
+        <div><label for="pet-name" class="block text-sm font-semibold text-gray-700 mb-2">Nombre de tu Mascota</label> <input type="text" id="pet-name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent" placeholder="Ej: Max">
+        </div>
+        <div><label for="owner-name" class="block text-sm font-semibold text-gray-700 mb-2">Tu Nombre</label> <input type="text" id="owner-name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent" placeholder="Ej: Juan Pérez">
+        </div>
+        <div><label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Teléfono</label> <input type="tel" id="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent" placeholder="(123) 456-7890">
+        </div><input type="hidden" id="appointment-date" required>
+        <div><label for="appointment-time" class="block text-sm font-semibold text-gray-700 mb-2">Hora</label> <select id="appointment-time" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent"> <option value="">Selecciona un horario</option> <option value="09:00">9:00 AM</option> <option value="10:00">10:00 AM</option> <option value="11:00">11:00 AM</option> <option value="12:00">12:00 PM</option> <option value="14:00">2:00 PM</option> <option value="15:00">3:00 PM</option> <option value="16:00">4:00 PM</option> <option value="17:00">5:00 PM</option> </select>
+        </div><button type="submit" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 rounded-lg transition"> Confirmar Cita </button>
+       </form>
+       <div id="success-message" class="hidden mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg text-center">
+        <p class="font-semibold">¡Cita agendada exitosamente! 🎉</p>
+        <p class="text-sm mt-1">Te contactaremos pronto para confirmar.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Footer -->
+   <footer class="w-full bg-gray-800 text-white py-8 px-6">
+    <div class="max-w-6xl mx-auto text-center">
+     <p id="footer-text">© 2024 Clínica Veterinaria. Todos los derechos reservados.</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Tips Data
+    const tipsData = [
+      {
+        category: 'nutrition',
+        icon: '🍖',
+        title: 'Alimentación Balanceada',
+        description: 'Proporciona una dieta equilibrada según la edad, tamaño y nivel de actividad de tu mascota.'
+      },
+      {
+        category: 'nutrition',
+        icon: '💧',
+        title: 'Agua Fresca Siempre',
+        description: 'Asegúrate de que tu mascota tenga acceso constante a agua limpia y fresca.'
+      },
+      {
+        category: 'health',
+        icon: '💉',
+        title: 'Vacunación al Día',
+        description: 'Mantén el calendario de vacunación actualizado para prevenir enfermedades graves.'
+      },
+      {
+        category: 'health',
+        icon: '🦷',
+        title: 'Higiene Dental',
+        description: 'Cepilla los dientes de tu mascota regularmente y revisa su salud bucal.'
+      },
+      {
+        category: 'health',
+        icon: '🏃',
+        title: 'Ejercicio Regular',
+        description: 'Proporciona ejercicio diario según las necesidades de la raza y edad.'
+      },
+      {
+        category: 'training',
+        icon: '🎓',
+        title: 'Entrenamiento Temprano',
+        description: 'Comienza el entrenamiento y socialización desde cachorro para mejores resultados.'
+      },
+      {
+        category: 'training',
+        icon: '❤️',
+        title: 'Refuerzo Positivo',
+        description: 'Usa premios y elogios en lugar de castigos para entrenar a tu mascota.'
+      },
+      {
+        category: 'training',
+        icon: '🤝',
+        title: 'Socialización',
+        description: 'Expone a tu mascota a diferentes personas, animales y ambientes desde pequeña.'
+      },
+      {
+        category: 'grooming',
+        icon: '🛁',
+        title: 'Baños Regulares',
+        description: 'Baña a tu mascota según su tipo de pelaje, generalmente cada 4-8 semanas.'
+      },
+      {
+        category: 'grooming',
+        icon: '✂️',
+        title: 'Corte de Uñas',
+        description: 'Mantén las uñas cortas para evitar problemas al caminar y lesiones.'
+      },
+      {
+        category: 'grooming',
+        icon: '🧹',
+        title: 'Cepillado Frecuente',
+        description: 'Cepilla el pelaje regularmente para evitar enredos y detectar problemas de piel.'
+      },
+      {
+        category: 'health',
+        icon: '🔍',
+        title: 'Revisiones Veterinarias',
+        description: 'Lleva a tu mascota al veterinario al menos una vez al año para chequeos preventivos.'
+      }
+    ];
+
+    let currentCategory = 'all';
+
+    function showTips(category) {
+      currentCategory = category;
+      
+      // Update tab styles
+      document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+        tab.className = 'px-6 py-2 rounded-full font-semibold transition bg-white text-gray-700 hover:bg-sky-100';
+      });
+      document.getElementById(`tab-${category}`).className = 'px-6 py-2 rounded-full font-semibold transition bg-sky-500 text-white';
+      
+      // Filter and display tips
+      const filteredTips = category === 'all' ? tipsData : tipsData.filter(tip => tip.category === category);
+      const container = document.getElementById('tips-container');
+      
+      container.innerHTML = filteredTips.map(tip => `
+        <div class="tip-card bg-white rounded-xl p-6 shadow-md">
+          <div class="text-4xl mb-3">${tip.icon}</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">${tip.title}</h3>
+          <p class="text-gray-600 leading-relaxed">${tip.description}</p>
+        </div>
+      `).join('');
+    }
+
+    // Calculator functions
+    function calculateAge() {
+      const petType = document.getElementById('pet-type').value;
+      const petAge = parseFloat(document.getElementById('pet-age').value);
+      
+      if (!petAge || petAge < 0) {
+        return;
+      }
+      
+      let humanAge;
+      
+      if (petType === 'dog') {
+        if (petAge <= 2) {
+          humanAge = petAge * 10.5;
+        } else {
+          humanAge = 21 + ((petAge - 2) * 4);
+        }
+      } else { // cat
+        if (petAge <= 2) {
+          humanAge = petAge * 12.5;
+        } else {
+          humanAge = 25 + ((petAge - 2) * 4);
+        }
+      }
+      
+      humanAge = Math.round(humanAge);
+      
+      document.getElementById('age-result-number').textContent = `${humanAge} años`;
+      document.getElementById('age-result-text').textContent = `Tu ${petType === 'dog' ? 'perro' : 'gato'} de ${petAge} años tiene aproximadamente ${humanAge} años en edad humana.`;
+      document.getElementById('age-result').classList.remove('hidden');
+    }
+
+    function calculateWeight() {
+      const breed = document.getElementById('dog-breed').value;
+      const weight = parseFloat(document.getElementById('current-weight').value);
+      
+      if (!weight || weight < 0) {
+        return;
+      }
+      
+      const weightRanges = {
+        small: { min: 2, max: 10 },
+        medium: { min: 10, max: 25 },
+        large: { min: 25, max: 45 },
+        giant: { min: 45, max: 90 }
+      };
+      
+      const range = weightRanges[breed];
+      const resultDiv = document.getElementById('weight-result');
+      const statusEl = document.getElementById('weight-status');
+      const recommendationEl = document.getElementById('weight-recommendation');
+      
+      if (weight < range.min) {
+        resultDiv.className = 'rounded-lg p-4 text-center bg-orange-100 border-2 border-orange-300';
+        statusEl.className = 'text-lg font-bold mb-2 text-orange-700';
+        statusEl.textContent = '⚠️ Peso Bajo';
+        recommendationEl.className = 'text-sm text-orange-700';
+        recommendationEl.textContent = `El peso ideal para esta raza es entre ${range.min}-${range.max} kg. Consulta con tu veterinario sobre nutrición.`;
+      } else if (weight > range.max) {
+        resultDiv.className = 'rounded-lg p-4 text-center bg-red-100 border-2 border-red-300';
+        statusEl.className = 'text-lg font-bold mb-2 text-red-700';
+        statusEl.textContent = '❌ Sobrepeso';
+        recommendationEl.className = 'text-sm text-red-700';
+        recommendationEl.textContent = `El peso ideal para esta raza es entre ${range.min}-${range.max} kg. Considera una dieta y más ejercicio.`;
+      } else {
+        resultDiv.className = 'rounded-lg p-4 text-center bg-green-100 border-2 border-green-300';
+        statusEl.className = 'text-lg font-bold mb-2 text-green-700';
+        statusEl.textContent = '✅ Peso Ideal';
+        recommendationEl.className = 'text-sm text-green-700';
+        recommendationEl.textContent = `¡Excelente! Tu mascota está en el rango saludable de ${range.min}-${range.max} kg.`;
+      }
+      
+      resultDiv.classList.remove('hidden');
+    }
+
+    // Appointment system
+    let selectedService = '';
+    let currentDate = new Date();
+    let selectedDate = null;
+
+    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    function openServicesModal() {
+      document.getElementById('services-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeServicesModal() {
+      document.getElementById('services-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function openCalendarFromMenu(serviceName) {
+      closeServicesModal();
+      openCalendar(serviceName);
+    }
+
+    function openCalendarFromCard(serviceName) {
+      openCalendar(serviceName);
+    }
+
+    document.getElementById('services-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeServicesModal();
+      }
+    });
+
+    function renderCalendar(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      
+      document.getElementById('calendar-month-year').textContent = `${monthNames[month]} ${year}`;
+      
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const calendarDays = document.getElementById('calendar-days');
+      calendarDays.innerHTML = '';
+      
+      for (let i = 0; i < firstDay; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.className = 'p-2';
+        calendarDays.appendChild(emptyDay);
+      }
+      
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayDate = new Date(year, month, day);
+        const dayButton = document.createElement('button');
+        dayButton.type = 'button';
+        dayButton.textContent = day;
+        dayButton.className = 'p-2 rounded-lg text-sm font-medium transition';
+        
+        if (dayDate < today) {
+          dayButton.className += ' text-gray-300 cursor-not-allowed';
+          dayButton.disabled = true;
+        } else if (selectedDate && dayDate.getTime() === selectedDate.getTime()) {
+          dayButton.className += ' bg-sky-500 text-white';
+        } else {
+          dayButton.className += ' text-gray-700 hover:bg-sky-100';
+          dayButton.onclick = () => selectDate(dayDate);
+        }
+        
+        calendarDays.appendChild(dayButton);
+      }
+    }
+
+    function selectDate(date) {
+      selectedDate = date;
+      const dateString = date.toISOString().split('T')[0];
+      document.getElementById('appointment-date').value = dateString;
+      
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = date.toLocaleDateString('es-ES', options);
+      document.getElementById('selected-date-display').textContent = `Fecha seleccionada: ${formattedDate}`;
+      document.getElementById('selected-date-display').className = 'mt-4 text-center text-sm text-sky-600 font-semibold';
+      
+      renderCalendar(currentDate);
+    }
+
+    document.getElementById('prev-month').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar(currentDate);
+    });
+
+    document.getElementById('next-month').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar(currentDate);
+    });
+
+    function openCalendar(serviceName) {
+      selectedService = serviceName;
+      document.getElementById('modal-service-title').textContent = `Agendar ${serviceName}`;
+      document.getElementById('calendar-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      
+      currentDate = new Date();
+      selectedDate = null;
+      document.getElementById('selected-date-display').textContent = 'Selecciona una fecha en el calendario';
+      document.getElementById('selected-date-display').className = 'mt-4 text-center text-sm text-gray-600';
+      renderCalendar(currentDate);
+    }
+
+    function closeCalendar() {
+      document.getElementById('calendar-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+      document.getElementById('appointment-form').reset();
+      document.getElementById('success-message').classList.add('hidden');
+      selectedDate = null;
+    }
+
+    document.getElementById('appointment-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (!selectedDate) {
+        document.getElementById('selected-date-display').textContent = 'Por favor selecciona una fecha en el calendario';
+        document.getElementById('selected-date-display').className = 'mt-4 text-center text-sm text-red-600 font-semibold';
+        return;
+      }
+      
+      document.getElementById('appointment-form').style.display = 'none';
+      document.getElementById('success-message').classList.remove('hidden');
+      
+      setTimeout(() => {
+        closeCalendar();
+        document.getElementById('appointment-form').style.display = 'block';
+      }, 3000);
+    });
+
+    document.getElementById('calendar-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeCalendar();
+      }
+    });
+
+    // Initialize tips
+    showTips('all');
+
+    // Theme toggle function
+    function toggleTheme() {
+      const body = document.body;
+      const sunIcon = document.getElementById('theme-icon-sun');
+      const moonIcon = document.getElementById('theme-icon-moon');
+      
+      body.classList.toggle('dark-theme');
+      
+      if (body.classList.contains('dark-theme')) {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // Load saved theme on page load
+    (function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        document.getElementById('theme-icon-sun').classList.add('hidden');
+        document.getElementById('theme-icon-moon').classList.remove('hidden');
+      }
+    })();
+
+    // Element SDK Config
+    const defaultConfig = {
+      clinic_name: "Clínica Veterinaria Patitas Felices",
+      hero_title: "Tu Nueva Veterinaria de Confianza",
+      hero_subtitle: "Atención personalizada y cercana para el cuidado de tu mejor amigo",
+      cta_button: "Agenda tu Primera Cita",
+      services_title: "Nuestros Servicios",
+      service_1_title: "Consulta General",
+      service_1_desc: "Exámenes completos y diagnósticos precisos",
+      service_2_title: "Vacunación",
+      service_2_desc: "Planes completos de vacunación para todas las edades",
+      service_3_title: "Desparasitación",
+      service_3_desc: "Control interno y externo de parásitos",
+      service_4_title: "Asesoría Nutricional",
+      service_4_desc: "Recomendaciones personalizadas de alimentación",
+      about_title: "¿Por Qué Elegirnos?",
+      about_text: "Contamos con un equipo de veterinarios especializados apasionados por el bienestar animal. Utilizamos tecnología de última generación para ofrecer diagnósticos precisos y tratamientos efectivos. Nuestro compromiso es brindar atención personalizada, tratando a cada mascota con el amor y cuidado que merece.",
+      contact_title: "Contáctanos",
+      phone_label: "Teléfono:",
+      phone_number: "(123) 456-7890",
+      email_label: "Email:",
+      email_address: "contacto@veterinaria.com",
+      hours_label: "Horario:",
+      hours_text: "Lun - Vie: 9:00 - 20:00 | Sáb: 9:00 - 14:00",
+      footer_text: "© 2024 Clínica Veterinaria. Todos los derechos reservados.",
+      background_color: "#f0f9ff",
+      surface_color: "#ffffff",
+      text_color: "#0f172a",
+      primary_action_color: "#0ea5e9",
+      secondary_action_color: "#06b6d4",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const fontSize = config.font_size || defaultConfig.font_size;
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'system-ui, -apple-system, sans-serif';
+      
+      document.body.style.fontFamily = `${fontFamily}, ${baseFontStack}`;
+      document.body.style.fontSize = `${fontSize}px`;
+      
+      document.getElementById('clinic-name').textContent = config.clinic_name || defaultConfig.clinic_name;
+      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('cta-button').querySelector('span').textContent = config.cta_button || defaultConfig.cta_button;
+      document.getElementById('services-title').textContent = config.services_title || defaultConfig.services_title;
+      document.getElementById('service-1-title').textContent = config.service_1_title || defaultConfig.service_1_title;
+      document.getElementById('service-1-desc').textContent = config.service_1_desc || defaultConfig.service_1_desc;
+      document.getElementById('service-2-title').textContent = config.service_2_title || defaultConfig.service_2_title;
+      document.getElementById('service-2-desc').textContent = config.service_2_desc || defaultConfig.service_2_desc;
+      document.getElementById('service-3-title').textContent = config.service_3_title || defaultConfig.service_3_title;
+      document.getElementById('service-3-desc').textContent = config.service_3_desc || defaultConfig.service_3_desc;
+      document.getElementById('service-4-title').textContent = config.service_4_title || defaultConfig.service_4_title;
+      document.getElementById('service-4-desc').textContent = config.service_4_desc || defaultConfig.service_4_desc;
+      document.getElementById('about-title').textContent = config.about_title || defaultConfig.about_title;
+      document.getElementById('about-text').textContent = config.about_text || defaultConfig.about_text;
+      document.getElementById('contact-title').textContent = config.contact_title || defaultConfig.contact_title;
+      document.getElementById('phone-label').textContent = config.phone_label || defaultConfig.phone_label;
+      document.getElementById('phone-number').textContent = config.phone_number || defaultConfig.phone_number;
+      document.getElementById('email-label').textContent = config.email_label || defaultConfig.email_label;
+      document.getElementById('email-address').textContent = config.email_address || defaultConfig.email_address;
+      document.getElementById('hours-label').textContent = config.hours_label || defaultConfig.hours_label;
+      document.getElementById('hours-text').textContent = config.hours_text || defaultConfig.hours_text;
+      document.getElementById('footer-text').textContent = config.footer_text || defaultConfig.footer_text;
+      
+      document.getElementById('modal-menu-service-1').textContent = config.service_1_title || defaultConfig.service_1_title;
+      document.getElementById('modal-menu-service-2').textContent = config.service_2_title || defaultConfig.service_2_title;
+      document.getElementById('modal-menu-service-3').textContent = config.service_3_title || defaultConfig.service_3_title;
+      document.getElementById('modal-menu-service-4').textContent = config.service_4_title || defaultConfig.service_4_title;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => {
+              config.secondary_action_color = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            if (window.elementSdk) {
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["clinic_name", config.clinic_name || defaultConfig.clinic_name],
+        ["hero_title", config.hero_title || defaultConfig.hero_title],
+        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+        ["cta_button", config.cta_button || defaultConfig.cta_button],
+        ["services_title", config.services_title || defaultConfig.services_title],
+        ["service_1_title", config.service_1_title || defaultConfig.service_1_title],
+        ["service_1_desc", config.service_1_desc || defaultConfig.service_1_desc],
+        ["service_2_title", config.service_2_title || defaultConfig.service_2_title],
+        ["service_2_desc", config.service_2_desc || defaultConfig.service_2_desc],
+        ["service_3_title", config.service_3_title || defaultConfig.service_3_title],
+        ["service_3_desc", config.service_3_desc || defaultConfig.service_3_desc],
+        ["service_4_title", config.service_4_title || defaultConfig.service_4_title],
+        ["service_4_desc", config.service_4_desc || defaultConfig.service_4_desc],
+        ["about_title", config.about_title || defaultConfig.about_title],
+        ["about_text", config.about_text || defaultConfig.about_text],
+        ["contact_title", config.contact_title || defaultConfig.contact_title],
+        ["phone_label", config.phone_label || defaultConfig.phone_label],
+        ["phone_number", config.phone_number || defaultConfig.phone_number],
+        ["email_label", config.email_label || defaultConfig.email_label],
+        ["email_address", config.email_address || defaultConfig.email_address],
+        ["hours_label", config.hours_label || defaultConfig.hours_label],
+        ["hours_text", config.hours_text || defaultConfig.hours_text],
+        ["footer_text", config.footer_text || defaultConfig.footer_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a78964df331b6df',t:'MTc2NDY1NTA1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
